@@ -4,13 +4,12 @@ class Scrabble
   end
 
   def initialize(word)
-    @word = word
+    @word = word || ''
   end
 
   def score
-    return 0 if @word.nil? || @word.strip.empty?
-
-    @word.upcase.chars.map { |l| SCRABBLE_VALUES[l] }.reduce(&:+)
+    @word.strip.upcase.each_char
+         .inject(0) { |score, char| score += SCRABBLE_VALUES[char] }
   end
 end
 
